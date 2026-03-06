@@ -1,0 +1,80 @@
+parameters:
+    auth_service_url: '%env(AUTH_SERVICE_URL)%'
+    public_route_prefixes: ['/metrics', '/api/doc', '/health']
+    protected_get_routes: ['/api/products']
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DataFixtures/'
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+    App\Service\SearchService:
+        arguments:
+            $productsFinder: '@fos_elastica.finder.products'
+
+    App\Client\AuthServiceClient:
+        arguments:
+            $authServiceUrl: '%auth_service_url%'
+
+    App\EventListener\AuthTokenListener:
+        arguments:
+            $publicPrefixes: '%public_route_prefixes%'
+            $protectedGetRoutes: '%protected_get_routes%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10 }
+
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, priority: 100 }
+
+    App\EventListener\ProductIndexListener:
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
+
+    App\Contract\ProductServiceInterface:
+        class: App\Service\ProductService
+
+    App\Contract\CategoryServiceInterface:
+        class: App\Service\CategoryService
+
+    App\Contract\SearchServiceInterface:
+        alias: App\Service\SearchService
+
+    App\Contract\AuthTokenValidatorInterface:
+        alias: App\Client\AuthServiceClient
+
+    App\Contract\MetricsRegistryInterface:
+        class: App\Metrics\PrometheusMetricsRegistry
+
+    App\EventListener\HttpMetricsListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+            - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
+
+    App\EventListener\ProductMetricsListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
+
+    App\Service\HealthCheckService:
+        arguments:
+            $redisUrl: '%env(REDIS_URL)%'
+            $elasticsearchHost: '%env(ELASTICSEARCH_HOST)%'
+            $kafkaBroker: '%env(KAFKA_BROKER)%'
+
+    App\Logger\ServiceNameProcessor:
+        tags:
+            - { name: monolog.processor }

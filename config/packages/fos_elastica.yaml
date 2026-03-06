@@ -1,0 +1,39 @@
+fos_elastica:
+    clients:
+        default:
+            host: '%env(string:key:host:url:ELASTICSEARCH_HOST)%'
+            port: '%env(int:key:port:url:ELASTICSEARCH_HOST)%'
+
+    indexes:
+        products:
+            properties:
+                id:
+                    type: keyword
+                name:
+                    type: text
+                    analyzer: standard
+                    fields:
+                        raw:
+                            type: keyword
+                description:
+                    type: text
+                    analyzer: standard
+                price:
+                    type: float
+                sku:
+                    type: keyword
+                stock:
+                    type: integer
+                categoryId:
+                    type: keyword
+                active:
+                    type: boolean
+                createdAt:
+                    type: date
+                updatedAt:
+                    type: date
+            persistence:
+                driver: orm
+                model: App\Entity\Product
+                provider: ~
+                finder: ~

@@ -1,0 +1,16 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Product Service API
+            description: Product and category management service - CRUD operations and search
+            version: 1.0.0
+        components:
+            securitySchemes:
+                BearerAuth:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+    areas:
+        path_patterns:
+            - ^/api
+            - ^/health/products

@@ -1,0 +1,15 @@
+framework:
+    messenger:
+        transports:
+            kafka:
+                dsn: '%env(KAFKA_DSN)%'
+                options:
+                    topics: ['product-events']
+                    consumer:
+                        config:
+                            group.id: 'product-service'
+
+        routing:
+            'App\Message\ProductCreated': kafka
+            'App\Message\ProductUpdated': kafka
+            'App\Message\ProductDeleted': kafka

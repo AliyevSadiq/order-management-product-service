@@ -1,0 +1,21 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    http_method_override: false
+    handle_all_throwables: true
+
+    php_errors:
+        log: true
+
+    serializer:
+        enabled: true
+
+    validation:
+        enabled: true
+        enable_attributes: true
+
+    uid:
+        default_uuid_version: 7
+        time_based_uuid_version: 7
+
+    router:
+        utf8: true

@@ -1,0 +1,10 @@
+event_driven_kafka_transport:
+    consumer:
+        commit_async: true
+        consume_timeout_ms: 500
+        config:
+            group.id: 'product-service'
+            auto.offset.reset: 'earliest'
+    producer:
+        config:
+            enable.idempotence: 'false'

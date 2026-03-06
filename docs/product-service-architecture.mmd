@@ -1,0 +1,115 @@
+graph TB
+    CLIENT["Client<br/>(with JWT token)"]
+
+    subgraph PRODUCT["Product Service (Symfony 7 / PHP 8.3+)"]
+        direction TB
+
+        subgraph Listeners["Event Listeners"]
+            AUTH_L["AuthTokenListener<br/>validates JWT via<br/>auth-service HTTP"]
+            EXC_L["ExceptionListener"]
+            HTTP_M["HttpMetricsListener"]
+            PROD_M["ProductMetricsListener"]
+            IDX_L["ProductIndexListener<br/>Doctrine lifecycle:<br/>postPersist, postUpdate,<br/>preRemove"]
+        end
+
+        subgraph Controllers["Controllers"]
+            PROD_C["ProductController<br/>GET/POST /api/products<br/>GET/PUT/DELETE /api/products/{id}"]
+            CAT_C["CategoryController<br/>GET /api/categories<br/>POST /api/categories<br/>GET /api/categories/{id}"]
+            SEARCH_C["SearchController<br/>GET /api/search"]
+            HEALTH_C["HealthController<br/>GET /health/products"]
+            METRICS_C["MetricsController<br/>GET /metrics"]
+        end
+
+        subgraph Services["Service Layer"]
+            PROD_S["ProductService<br/>CRUD + SKU validation<br/>+ event dispatch"]
+            CAT_S["CategoryService<br/>CRUD + slug uniqueness<br/>+ parent hierarchy"]
+            SEARCH_S["SearchService<br/>Boolean queries<br/>fuzzy matching<br/>price/category filters"]
+            CACHE_S["ProductCacheManager<br/>TTL-based invalidation"]
+            VALID["RequestValidator"]
+        end
+    end
+
+    subgraph ExtServices["External Services (HTTP)"]
+        AUTH_SVC["Auth Service<br/>GET /api/auth/profile<br/>(token validation)"]
+    end
+
+    subgraph Data["Data Stores"]
+        PG[("PostgreSQL 16<br/>products &<br/>categories")]
+        REDIS[("Redis 7<br/>Product cache: 1h TTL<br/>Category cache: 2h TTL")]
+    end
+
+    subgraph Search["Search Engine"]
+        ES["Elasticsearch 8.11<br/>products index<br/>name (3x boost) +<br/>description"]
+    end
+
+    subgraph Kafka_Block["Kafka"]
+        KAFKA["topic: product-events"]
+    end
+
+    subgraph Events["Published Event"]
+        E2["ProductUpdated<br/>productId, changedFields,<br/>name, price"]
+    end
+
+    subgraph Downstream["Downstream Consumer"]
+        ORDER_SVC["Order Service<br/>consumer group:<br/>order-service-group<br/>(syncs product names)"]
+    end
+
+    subgraph Monitoring["Observability"]
+        PROM["Prometheus<br/>Metrics"]
+        SENTRY["Sentry<br/>Error Tracking"]
+    end
+
+    CLIENT -->|"Authorization:<br/>Bearer token"| AUTH_L
+    AUTH_L -->|"GET /api/auth/profile"| AUTH_SVC
+    AUTH_L --> Controllers
+
+    PROD_C & CAT_C --> VALID
+    VALID --> PROD_S
+    VALID --> CAT_S
+    SEARCH_C --> SEARCH_S
+
+    PROD_S -->|"persist"| PG
+    CAT_S -->|"persist"| PG
+    PROD_S --> CACHE_S
+    CAT_S --> CACHE_S
+    CACHE_S -->|"get/set/invalidate"| REDIS
+
+    IDX_L -->|"index/update/remove"| ES
+    SEARCH_S -->|"query"| ES
+
+    PROD_S -->|"dispatch"| E2
+    E2 --> KAFKA
+
+    KAFKA -->|"consume"| ORDER_SVC
+
+    HTTP_M & PROD_M --> PROM
+    EXC_L --> SENTRY
+    HEALTH_C -->|"check"| PG
+    HEALTH_C -->|"check"| REDIS
+    HEALTH_C -->|"check"| ES
+    HEALTH_C -->|"check"| KAFKA
+
+    classDef client fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    classDef controller fill:#5BA85B,stroke:#3D7A3D,color:#fff
+    classDef listener fill:#E8A838,stroke:#B8822A,color:#fff
+    classDef service fill:#9B59B6,stroke:#7D3C98,color:#fff
+    classDef data fill:#E74C3C,stroke:#C0392B,color:#fff
+    classDef search fill:#2196F3,stroke:#1565C0,color:#fff
+    classDef event fill:#1ABC9C,stroke:#16A085,color:#fff
+    classDef kafka fill:#FF6B35,stroke:#CC5529,color:#fff
+    classDef monitor fill:#95A5A6,stroke:#7F8C8D,color:#fff
+    classDef downstream fill:#F39C12,stroke:#D68910,color:#fff
+    classDef external fill:#4A90D9,stroke:#2C5F8A,color:#fff
+
+    class CLIENT client
+    class PROD_C,CAT_C,SEARCH_C,HEALTH_C,METRICS_C controller
+    class AUTH_L,EXC_L,HTTP_M,PROD_M,IDX_L listener
+    class PROD_S,CAT_S,SEARCH_S,CACHE_S,VALID service
+    class PG data
+    class REDIS data
+    class ES search
+    class E2 event
+    class KAFKA kafka
+    class PROM,SENTRY monitor
+    class ORDER_SVC downstream
+    class AUTH_SVC external

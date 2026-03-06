@@ -1,0 +1,44 @@
+product_list:
+    path: /products
+    controller: App\Controller\Api\ProductController::list
+    methods: [GET]
+
+product_create:
+    path: /products
+    controller: App\Controller\Api\ProductController::create
+    methods: [POST]
+
+product_show:
+    path: /products/{id}
+    controller: App\Controller\Api\ProductController::show
+    methods: [GET]
+
+product_update:
+    path: /products/{id}
+    controller: App\Controller\Api\ProductController::update
+    methods: [PUT]
+
+product_delete:
+    path: /products/{id}
+    controller: App\Controller\Api\ProductController::delete
+    methods: [DELETE]
+
+category_list:
+    path: /categories
+    controller: App\Controller\Api\CategoryController::list
+    methods: [GET]
+
+category_create:
+    path: /categories
+    controller: App\Controller\Api\CategoryController::create
+    methods: [POST]
+
+category_show:
+    path: /categories/{id}
+    controller: App\Controller\Api\CategoryController::show
+    methods: [GET]
+
+search:
+    path: /search
+    controller: App\Controller\Api\SearchController::search
+    methods: [GET]
