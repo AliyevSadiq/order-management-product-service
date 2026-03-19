@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Service\RequestValidator;
 
 #[OA\Tag(name: 'Categories')]
-#[Route('/api/categories')]
+#[Route('/api/v1/categories')]
 final class CategoryController extends AbstractController
 {
     public function __construct(
@@ -25,7 +25,7 @@ final class CategoryController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/categories',
+        path: '/api/v1/categories',
         summary: 'List all categories',
         tags: ['Categories'],
         responses: [
@@ -57,7 +57,7 @@ final class CategoryController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/categories',
+        path: '/api/v1/categories',
         summary: 'Create a new category',
         security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(
@@ -118,7 +118,7 @@ final class CategoryController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/categories/{id}',
+        path: '/api/v1/categories/{id}',
         summary: 'Get a category by ID',
         tags: ['Categories'],
         parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'string', format: 'uuid'))],

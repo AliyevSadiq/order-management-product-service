@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Service\RequestValidator;
 
 #[OA\Tag(name: 'Products')]
-#[Route('/api/products')]
+#[Route('/api/v1/products')]
 final class ProductController extends AbstractController
 {
     public function __construct(
@@ -26,7 +26,7 @@ final class ProductController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/products',
+        path: '/api/v1/products',
         summary: 'List all products with pagination',
         security: [['BearerAuth' => []]],
         tags: ['Products'],
@@ -51,7 +51,7 @@ final class ProductController extends AbstractController
     }
 
     #[OA\Post(
-        path: '/api/products',
+        path: '/api/v1/products',
         summary: 'Create a new product',
         security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: new Model(type: CreateProductRequest::class))),
@@ -88,7 +88,7 @@ final class ProductController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/products/{id}',
+        path: '/api/v1/products/{id}',
         summary: 'Get a product by ID',
         tags: ['Products'],
         parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'string', format: 'uuid'))],
@@ -110,7 +110,7 @@ final class ProductController extends AbstractController
     }
 
     #[OA\Put(
-        path: '/api/products/{id}',
+        path: '/api/v1/products/{id}',
         summary: 'Update a product',
         security: [['BearerAuth' => []]],
         requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(ref: new Model(type: UpdateProductRequest::class))),
@@ -153,7 +153,7 @@ final class ProductController extends AbstractController
     }
 
     #[OA\Delete(
-        path: '/api/products/{id}',
+        path: '/api/v1/products/{id}',
         summary: 'Delete a product',
         security: [['BearerAuth' => []]],
         tags: ['Products'],

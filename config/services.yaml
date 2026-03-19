@@ -1,7 +1,7 @@
 parameters:
     auth_service_url: '%env(AUTH_SERVICE_URL)%'
     public_route_prefixes: ['/metrics', '/api/doc', '/health']
-    protected_get_routes: ['/api/products']
+    protected_get_routes: ['/api/v1/products']
 
 services:
     _defaults:
@@ -24,6 +24,12 @@ services:
         arguments:
             $productsFinder: '@fos_elastica.finder.products'
 
+    App\CircuitBreaker\CircuitBreakerFactory:
+        arguments:
+            $redisHost: '%env(REDIS_HOST)%'
+            $redisPort: '%env(int:REDIS_PORT)%'
+            $redisPassword: '%env(REDIS_PASSWORD)%'
+
     App\Client\AuthServiceClient:
         arguments:
             $authServiceUrl: '%auth_service_url%'
@@ -34,6 +40,22 @@ services:
             $protectedGetRoutes: '%protected_get_routes%'
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10 }
+
+    App\RateLimit\RateLimitService:
+        arguments:
+            $redisHost: '%env(REDIS_HOST)%'
+            $redisPort: '%env(int:REDIS_PORT)%'
+            $redisPassword: '%env(REDIS_PASSWORD)%'
+            $maxTokens: 100
+            $windowSeconds: 60
+
+    App\EventListener\UserRateLimitListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 8 }
+
+    App\EventListener\RateLimitHeaderListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
     App\EventListener\ExceptionListener:
         tags:
@@ -74,6 +96,27 @@ services:
             $redisUrl: '%env(REDIS_URL)%'
             $elasticsearchHost: '%env(ELASTICSEARCH_HOST)%'
             $kafkaBroker: '%env(KAFKA_BROKER)%'
+
+    App\Tracing\TracingService:
+        arguments:
+            $jaegerEndpoint: '%env(JAEGER_ENDPOINT)%'
+            $serviceName: '%env(SERVICE_NAME)%'
+
+    App\EventListener\TracingListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+
+    App\EventListener\TracingFinishListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
+
+    App\EventListener\TracingResponseListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+    App\Logger\TraceContextProcessor:
+        tags:
+            - { name: monolog.processor }
 
     App\Logger\ServiceNameProcessor:
         tags:

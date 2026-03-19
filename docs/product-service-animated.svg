@@ -1,0 +1,601 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 980" width="1700" height="980" style="background:#fffff0;font-family:Arial,sans-serif;">
+<defs>
+  <marker id="arr"        markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#666"/></marker>
+  <marker id="arr-blue"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#4A90D9"/></marker>
+  <marker id="arr-green"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#5BA85B"/></marker>
+  <marker id="arr-amber"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#E8A838"/></marker>
+  <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#9B59B6"/></marker>
+  <marker id="arr-teal"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1ABC9C"/></marker>
+  <marker id="arr-kafka"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#FF6B35"/></marker>
+  <marker id="arr-es"     markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2196F3"/></marker>
+  <marker id="arr-red"    markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#E74C3C"/></marker>
+  <marker id="arr-gray"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#95A5A6"/></marker>
+
+  <filter id="gb"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gg"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="go"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gp"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gt"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gk"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="ges"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gr"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="sh"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#00000020"/></filter>
+</defs>
+
+<!-- ═══ SECTION BACKGROUNDS ═══ -->
+
+<!-- Product Service main -->
+<rect x="230" y="44" width="1450" height="560" rx="8" fill="#fffde0" stroke="#cccc88" stroke-width="1.5"/>
+<text x="955" y="60" text-anchor="middle" font-size="12" fill="#888" font-weight="600">Product Service (Symfony 7 / PHP 8.4)</text>
+
+<!-- Event Listeners -->
+<rect x="240" y="65" width="660" height="160" rx="6" fill="#fff5d8" stroke="#ccbb77" stroke-width="1"/>
+<text x="570" y="80" text-anchor="middle" font-size="11" fill="#aaa" font-weight="600">Event Listeners</text>
+
+<!-- Controllers -->
+<rect x="920" y="65" width="750" height="130" rx="6" fill="#f0ffe8" stroke="#aaccaa" stroke-width="1"/>
+<text x="1295" y="80" text-anchor="middle" font-size="11" fill="#888" font-weight="600">Controllers</text>
+
+<!-- Service Layer -->
+<rect x="920" y="215" width="750" height="375" rx="6" fill="#f5eeff" stroke="#c0a0e0" stroke-width="1"/>
+<text x="1295" y="232" text-anchor="middle" font-size="11" fill="#888" font-weight="600">Service Layer</text>
+
+<!-- External Services -->
+<rect x="20" y="120" width="185" height="120" rx="6" fill="#e8f0ff" stroke="#88aadd" stroke-width="1"/>
+<text x="112" y="136" text-anchor="middle" font-size="10" fill="#666" font-weight="600">External Services (HTTP)</text>
+
+<!-- Observability -->
+<rect x="20" y="260" width="185" height="150" rx="6" fill="#f0f0f0" stroke="#aaa" stroke-width="1"/>
+<text x="112" y="276" text-anchor="middle" font-size="10" fill="#666" font-weight="600">Observability</text>
+
+<!-- Search Engine -->
+<rect x="20" y="430" width="185" height="110" rx="6" fill="#e8f4ff" stroke="#88bbdd" stroke-width="1"/>
+<text x="112" y="446" text-anchor="middle" font-size="10" fill="#666" font-weight="600">Search Engine</text>
+
+<!-- Published Events -->
+<rect x="240" y="630" width="560" height="100" rx="6" fill="#e0fff8" stroke="#80ccbb" stroke-width="1"/>
+<text x="520" y="646" text-anchor="middle" font-size="10" fill="#666" font-weight="600">Published Events</text>
+
+<!-- Kafka -->
+<rect x="240" y="750" width="560" height="90" rx="6" fill="#fff0e8" stroke="#cc8855" stroke-width="1"/>
+<text x="520" y="766" text-anchor="middle" font-size="10" fill="#888" font-weight="600">Kafka</text>
+
+<!-- Data Stores -->
+<rect x="1130" y="630" width="550" height="200" rx="6" fill="#ffe8e8" stroke="#e09090" stroke-width="1"/>
+<text x="1405" y="646" text-anchor="middle" font-size="10" fill="#888" font-weight="600">Data Stores</text>
+
+<!-- Downstream Consumer -->
+<rect x="240" y="860" width="560" height="100" rx="6" fill="#fff3e0" stroke="#e0a050" stroke-width="1"/>
+<text x="520" y="876" text-anchor="middle" font-size="10" fill="#666" font-weight="600">Downstream Consumer</text>
+
+
+<!-- ═══ NODES ═══ -->
+
+<!-- CLIENT -->
+<g filter="url(#gb)">
+  <rect x="750" y="8" width="120" height="38" rx="5" fill="#4A90D9" stroke="#2C5F8A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="810" y="23" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Client</text>
+  <text x="810" y="38" text-anchor="middle" font-size="8.5" fill="#dde">(with JWT token)</text>
+</g>
+
+<!-- EVENT LISTENERS (amber) -->
+<g filter="url(#go)">
+  <rect x="248" y="88" width="130" height="50" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="313" y="103" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">AuthTokenListener</text>
+  <text x="313" y="115" text-anchor="middle" font-size="7.5" fill="#fff">validates JWT via</text>
+  <text x="313" y="127" text-anchor="middle" font-size="7.5" fill="#fff">auth-service HTTP</text>
+</g>
+<g filter="url(#go)">
+  <rect x="390" y="88" width="105" height="50" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.7s" repeatCount="indefinite" begin="0.3s"/>
+  </rect>
+  <text x="442" y="103" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">CircuitBreaker</text>
+  <text x="442" y="115" text-anchor="middle" font-size="7.5" fill="#fff">(auth-service)</text>
+</g>
+<g filter="url(#go)">
+  <rect x="507" y="88" width="105" height="50" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.5s" repeatCount="indefinite" begin="0.6s"/>
+  </rect>
+  <text x="559" y="103" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">RateLimitListener</text>
+  <text x="559" y="115" text-anchor="middle" font-size="7.5" fill="#fff">100 req/60s</text>
+  <text x="559" y="127" text-anchor="middle" font-size="7.5" fill="#fff">per user</text>
+</g>
+<g filter="url(#go)">
+  <rect x="624" y="88" width="105" height="50" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.8s" repeatCount="indefinite" begin="0.9s"/>
+  </rect>
+  <text x="676" y="103" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">TracingListener</text>
+  <text x="676" y="115" text-anchor="middle" font-size="7.5" fill="#fff">start/finish</text>
+  <text x="676" y="127" text-anchor="middle" font-size="7.5" fill="#fff">spans</text>
+</g>
+<g filter="url(#go)">
+  <rect x="741" y="88" width="95" height="50" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite" begin="1.2s"/>
+  </rect>
+  <text x="788" y="103" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">Exception</text>
+  <text x="788" y="115" text-anchor="middle" font-size="7.5" fill="#fff">Listener</text>
+</g>
+<g filter="url(#go)">
+  <rect x="248" y="152" width="100" height="40" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.6s" repeatCount="indefinite" begin="1.5s"/>
+  </rect>
+  <text x="298" y="167" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">HttpMetrics</text>
+  <text x="298" y="180" text-anchor="middle" font-size="7.5" fill="#fff">Listener</text>
+</g>
+<g filter="url(#go)">
+  <rect x="360" y="152" width="105" height="40" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.9s" repeatCount="indefinite" begin="1.8s"/>
+  </rect>
+  <text x="412" y="167" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">ProductMetrics</text>
+  <text x="412" y="180" text-anchor="middle" font-size="7.5" fill="#fff">Listener</text>
+</g>
+<g filter="url(#go)">
+  <rect x="477" y="148" width="145" height="48" rx="5" fill="#E8A838" stroke="#B8822A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.5s" repeatCount="indefinite" begin="2.1s"/>
+  </rect>
+  <text x="549" y="163" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">ProductIndexListener</text>
+  <text x="549" y="175" text-anchor="middle" font-size="7.5" fill="#fff">Doctrine lifecycle:</text>
+  <text x="549" y="186" text-anchor="middle" font-size="7.5" fill="#fff">postPersist/Update/Remove</text>
+</g>
+
+<!-- CONTROLLERS (green) -->
+<g filter="url(#gg)">
+  <rect x="928" y="88" width="175" height="58" rx="5" fill="#5BA85B" stroke="#3D7A3D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="1015" y="104" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">ProductController</text>
+  <text x="1015" y="116" text-anchor="middle" font-size="7.5" fill="#dfd">GET/POST /api/v1/products</text>
+  <text x="1015" y="127" text-anchor="middle" font-size="7.5" fill="#dfd">GET/PUT/DELETE</text>
+  <text x="1015" y="138" text-anchor="middle" font-size="7.5" fill="#dfd">/api/v1/products/{id}</text>
+</g>
+<g filter="url(#gg)">
+  <rect x="1116" y="88" width="155" height="58" rx="5" fill="#5BA85B" stroke="#3D7A3D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3.8s" repeatCount="indefinite" begin="0.5s"/>
+  </rect>
+  <text x="1193" y="104" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">SearchController</text>
+  <text x="1193" y="116" text-anchor="middle" font-size="7.5" fill="#dfd">GET /api/v1/search</text>
+</g>
+<g filter="url(#gg)">
+  <rect x="1284" y="88" width="175" height="58" rx="5" fill="#5BA85B" stroke="#3D7A3D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3.3s" repeatCount="indefinite" begin="1s"/>
+  </rect>
+  <text x="1371" y="104" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">CategoryController</text>
+  <text x="1371" y="116" text-anchor="middle" font-size="7.5" fill="#dfd">GET/POST /api/v1/categories</text>
+  <text x="1371" y="127" text-anchor="middle" font-size="7.5" fill="#dfd">GET /api/v1/categories/{id}</text>
+</g>
+<g filter="url(#gg)">
+  <rect x="1072" y="155" width="150" height="32" rx="5" fill="#5BA85B" stroke="#3D7A3D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="4s" repeatCount="indefinite" begin="1.5s"/>
+  </rect>
+  <text x="1147" y="169" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">HealthController</text>
+  <text x="1147" y="181" text-anchor="middle" font-size="7.5" fill="#dfd">GET /health/products</text>
+</g>
+<g filter="url(#gg)">
+  <rect x="1461" y="88" width="200" height="58" rx="5" fill="#5BA85B" stroke="#3D7A3D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3.6s" repeatCount="indefinite" begin="2s"/>
+  </rect>
+  <text x="1561" y="104" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">StockController</text>
+  <text x="1561" y="116" text-anchor="middle" font-size="7.5" fill="#dfd">POST .../reserve-stock</text>
+  <text x="1561" y="127" text-anchor="middle" font-size="7.5" fill="#dfd">POST .../confirm-stock</text>
+  <text x="1561" y="138" text-anchor="middle" font-size="7.5" fill="#dfd">POST .../release-stock</text>
+</g>
+<g filter="url(#gg)">
+  <rect x="1230" y="155" width="120" height="32" rx="5" fill="#5BA85B" stroke="#3D7A3D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3.7s" repeatCount="indefinite" begin="2.5s"/>
+  </rect>
+  <text x="1290" y="169" text-anchor="middle" font-size="8.5" fill="white" font-weight="bold">MetricsController</text>
+  <text x="1290" y="181" text-anchor="middle" font-size="7.5" fill="#dfd">GET /metrics</text>
+</g>
+
+<!-- SERVICE LAYER (purple) -->
+<g filter="url(#gp)">
+  <rect x="930" y="245" width="155" height="56" rx="5" fill="#9B59B6" stroke="#7D3C98" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="1007" y="261" text-anchor="middle" font-size="9" fill="white" font-weight="bold">ProductService</text>
+  <text x="1007" y="274" text-anchor="middle" font-size="7.5" fill="#eee">CRUD + SKU validation</text>
+  <text x="1007" y="285" text-anchor="middle" font-size="7.5" fill="#eee">+ event dispatch</text>
+</g>
+<g filter="url(#gp)">
+  <rect x="1100" y="245" width="100" height="40" rx="5" fill="#9B59B6" stroke="#7D3C98" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="3.3s" repeatCount="indefinite" begin="0.5s"/>
+  </rect>
+  <text x="1150" y="261" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Request</text>
+  <text x="1150" y="275" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Validator</text>
+</g>
+<g filter="url(#gp)">
+  <rect x="930" y="330" width="155" height="56" rx="5" fill="#9B59B6" stroke="#7D3C98" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="2.8s" repeatCount="indefinite" begin="1s"/>
+  </rect>
+  <text x="1007" y="346" text-anchor="middle" font-size="9" fill="white" font-weight="bold">CategoryService</text>
+  <text x="1007" y="359" text-anchor="middle" font-size="7.5" fill="#eee">CRUD + slug uniqueness</text>
+  <text x="1007" y="370" text-anchor="middle" font-size="7.5" fill="#eee">+ parent hierarchy</text>
+</g>
+<g filter="url(#gp)">
+  <rect x="1100" y="330" width="155" height="56" rx="5" fill="#9B59B6" stroke="#7D3C98" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="3.5s" repeatCount="indefinite" begin="1.5s"/>
+  </rect>
+  <text x="1177" y="346" text-anchor="middle" font-size="9" fill="white" font-weight="bold">SearchService</text>
+  <text x="1177" y="359" text-anchor="middle" font-size="7.5" fill="#eee">Boolean queries</text>
+  <text x="1177" y="370" text-anchor="middle" font-size="7.5" fill="#eee">fuzzy matching</text>
+</g>
+<g filter="url(#gp)">
+  <rect x="930" y="420" width="155" height="56" rx="5" fill="#9B59B6" stroke="#7D3C98" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="3.2s" repeatCount="indefinite" begin="2s"/>
+  </rect>
+  <text x="1007" y="436" text-anchor="middle" font-size="9" fill="white" font-weight="bold">StockReservation</text>
+  <text x="1007" y="449" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Service</text>
+  <text x="1007" y="462" text-anchor="middle" font-size="7.5" fill="#eee">reserve/confirm/release</text>
+</g>
+<g filter="url(#gp)">
+  <rect x="1100" y="420" width="155" height="56" rx="5" fill="#9B59B6" stroke="#7D3C98" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="3.8s" repeatCount="indefinite" begin="2.5s"/>
+  </rect>
+  <text x="1177" y="436" text-anchor="middle" font-size="9" fill="white" font-weight="bold">ProductCache</text>
+  <text x="1177" y="449" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Manager</text>
+  <text x="1177" y="462" text-anchor="middle" font-size="7.5" fill="#eee">TTL-based invalidation</text>
+</g>
+
+<!-- AUTH SERVICE (external) -->
+<g filter="url(#gb)">
+  <rect x="28" y="148" width="165" height="56" rx="5" fill="#4A90D9" stroke="#2C5F8A" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="110" y="164" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Auth Service</text>
+  <text x="110" y="177" text-anchor="middle" font-size="7.5" fill="#dde">GET /api/v1/auth/profile</text>
+  <text x="110" y="188" text-anchor="middle" font-size="7.5" fill="#dde">(token validation)</text>
+</g>
+
+<!-- OBSERVABILITY -->
+<g filter="url(#gb)">
+  <rect x="28" y="286" width="115" height="34" rx="5" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="85" y="300" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Prometheus</text>
+  <text x="85" y="313" text-anchor="middle" font-size="8" fill="#eee">Metrics</text>
+</g>
+<g filter="url(#gb)">
+  <rect x="28" y="332" width="115" height="34" rx="5" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3.5s" repeatCount="indefinite" begin="0.7s"/>
+  </rect>
+  <text x="85" y="346" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Sentry</text>
+  <text x="85" y="360" text-anchor="middle" font-size="8" fill="#eee">Error Tracking</text>
+</g>
+<g filter="url(#gb)">
+  <rect x="28" y="378" width="115" height="34" rx="5" fill="#95A5A6" stroke="#7F8C8D" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3.8s" repeatCount="indefinite" begin="1.4s"/>
+  </rect>
+  <text x="85" y="392" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Jaeger</text>
+  <text x="85" y="406" text-anchor="middle" font-size="8" fill="#eee">Distributed Tracing</text>
+</g>
+
+<!-- ELASTICSEARCH -->
+<g filter="url(#ges)">
+  <rect x="28" y="455" width="165" height="72" rx="5" fill="#2196F3" stroke="#1565C0" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="110" y="473" text-anchor="middle" font-size="9" fill="white" font-weight="bold">Elasticsearch 8.11</text>
+  <text x="110" y="486" text-anchor="middle" font-size="7.5" fill="#def">products index</text>
+  <text x="110" y="498" text-anchor="middle" font-size="7.5" fill="#def">name (3x boost)</text>
+  <text x="110" y="510" text-anchor="middle" font-size="7.5" fill="#def">+ description</text>
+</g>
+
+<!-- PUBLISHED EVENTS (teal) -->
+<g filter="url(#gt)">
+  <rect x="250" y="656" width="150" height="56" rx="5" fill="#1ABC9C" stroke="#16A085" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="325" y="672" text-anchor="middle" font-size="9" fill="white" font-weight="bold">ProductCreated</text>
+  <text x="325" y="685" text-anchor="middle" font-size="7.5" fill="#dff">productId, name,</text>
+  <text x="325" y="696" text-anchor="middle" font-size="7.5" fill="#dff">price, sku</text>
+</g>
+<g filter="url(#gt)">
+  <rect x="415" y="656" width="165" height="56" rx="5" fill="#1ABC9C" stroke="#16A085" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.8s" repeatCount="indefinite" begin="0.5s"/>
+  </rect>
+  <text x="497" y="672" text-anchor="middle" font-size="9" fill="white" font-weight="bold">ProductUpdated</text>
+  <text x="497" y="685" text-anchor="middle" font-size="7.5" fill="#dff">productId, changedFields,</text>
+  <text x="497" y="696" text-anchor="middle" font-size="7.5" fill="#dff">name, price</text>
+</g>
+<g filter="url(#gt)">
+  <rect x="595" y="656" width="150" height="56" rx="5" fill="#1ABC9C" stroke="#16A085" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite" begin="1s"/>
+  </rect>
+  <text x="670" y="672" text-anchor="middle" font-size="9" fill="white" font-weight="bold">ProductDeleted</text>
+  <text x="670" y="685" text-anchor="middle" font-size="7.5" fill="#dff">productId</text>
+</g>
+
+<!-- KAFKA TOPIC -->
+<g filter="url(#gk)">
+  <rect x="350" y="775" width="335" height="50" rx="5" fill="#FF6B35" stroke="#CC5529" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;3;1.5" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="517" y="796" text-anchor="middle" font-size="10" fill="white" font-weight="bold">topic: product-events</text>
+  <text x="517" y="812" text-anchor="middle" font-size="8.5" fill="#ffe"> </text>
+</g>
+
+<!-- POSTGRESQL -->
+<g filter="url(#gr)">
+  <rect x="1148" y="658" width="215" height="62" rx="5" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <text x="1255" y="675" text-anchor="middle" font-size="10" fill="white" font-weight="bold">PostgreSQL 16</text>
+  <text x="1255" y="688" text-anchor="middle" font-size="8" fill="#fdd">products, categories</text>
+  <text x="1255" y="700" text-anchor="middle" font-size="8" fill="#fdd">&amp; stock_reservations</text>
+  <text x="1255" y="712" text-anchor="middle" font-size="8" fill="#fdd"> </text>
+</g>
+
+<!-- REDIS -->
+<g filter="url(#gr)">
+  <rect x="1390" y="658" width="270" height="62" rx="5" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.8s" repeatCount="indefinite" begin="0.7s"/>
+  </rect>
+  <text x="1525" y="675" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Redis 7</text>
+  <text x="1525" y="688" text-anchor="middle" font-size="8" fill="#fdd">Product cache: 1h TTL</text>
+  <text x="1525" y="700" text-anchor="middle" font-size="8" fill="#fdd">Category cache: 2h TTL</text>
+</g>
+
+<!-- DOWNSTREAM -->
+<g filter="url(#go)">
+  <rect x="285" y="890" width="475" height="56" rx="5" fill="#F39C12" stroke="#D68910" stroke-width="1.5">
+    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  <text x="522" y="908" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Order Service</text>
+  <text x="522" y="921" text-anchor="middle" font-size="8" fill="#fff">consumer group: order-service-group (syncs product names)</text>
+  <text x="522" y="934" text-anchor="middle" font-size="8" fill="#fff"> </text>
+</g>
+
+
+<!-- ═══ CONNECTION LINES ═══ -->
+
+<!-- Client → AuthTokenListener -->
+<path d="M810,46 L810,68 L313,68 L313,88" stroke="#4A90D9" stroke-width="1.3" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-blue)"/>
+<text x="560" y="64" font-size="8.5" fill="#4A90D9">Authorization: Bearer token</text>
+
+<!-- AuthTokenListener → Auth Service (validate) -->
+<path d="M248,113 L110,113 L110,148" stroke="#E8A838" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-amber)"/>
+<text x="145" y="110" font-size="8" fill="#E8A838">GET /api/v1/auth/profile</text>
+
+<!-- AuthTokenListener → Controllers -->
+<path d="M313,138 L313,200 L1015,200 L1015,146" stroke="#E8A838" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-amber)"/>
+
+<!-- ProductController → Validator → ProductService -->
+<path d="M1015,146 L1015,215 L1150,245" stroke="#5BA85B" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.8"/>
+<path d="M1150,265 L1007,245" stroke="#9B59B6" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-purple)" opacity="0.8"/>
+
+<!-- CategoryController → Validator → CategoryService -->
+<path d="M1371,146 L1371,215 L1150,245" stroke="#5BA85B" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.8"/>
+<path d="M1150,265 L1007,330" stroke="#9B59B6" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-purple)" opacity="0.8"/>
+
+<!-- SearchController → SearchService -->
+<path d="M1193,146 L1193,215 L1177,330" stroke="#5BA85B" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.8"/>
+
+<!-- StockController → StockReservationService -->
+<path d="M1561,146 L1561,215 L1500,215 L1007,420" stroke="#5BA85B" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.8"/>
+
+<!-- ProductService → PostgreSQL -->
+<path d="M1007,301 L1007,620 L1255,658" stroke="#9B59B6" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+<text x="1080" y="617" font-size="8" fill="#9B59B6">persist</text>
+
+<!-- CategoryService → PostgreSQL -->
+<path d="M1007,386 L1007,620 L1200,658" stroke="#9B59B6" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-purple)" opacity="0.8"/>
+
+<!-- StockReservationService → PostgreSQL -->
+<path d="M1007,476 L1007,620 L1220,658" stroke="#9B59B6" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-purple)" opacity="0.8"/>
+<text x="1050" y="548" font-size="8" fill="#9B59B6">reserve/confirm/release</text>
+
+<!-- ProductService / CategoryService → CacheManager -->
+<path d="M1085,268 L1177,420" stroke="#9B59B6" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-purple)" opacity="0.8"/>
+<path d="M1085,352 L1177,420" stroke="#9B59B6" stroke-width="1.1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-purple)" opacity="0.8"/>
+
+<!-- CacheManager → Redis -->
+<path d="M1177,476 L1177,620 L1525,658" stroke="#9B59B6" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+<text x="1300" y="617" font-size="8" fill="#9B59B6">get/set/invalidate</text>
+
+<!-- ProductIndexListener → Elasticsearch -->
+<path d="M549,196 L549,250 L200,491 L193,491" stroke="#E8A838" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-amber)"/>
+<text x="260" y="380" font-size="8" fill="#E8A838">index/update/remove</text>
+
+<!-- SearchService → Elasticsearch -->
+<path d="M1177,386 L1177,440 L800,440 L800,500 L193,500" stroke="#2196F3" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-es)"/>
+<text x="700" y="437" font-size="8" fill="#2196F3">query</text>
+
+<!-- ProductService → Events (dispatch) -->
+<path d="M930,268 L520,268 L325,656" stroke="#1ABC9C" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-teal)"/>
+<path d="M930,268 L520,268 L497,656" stroke="#1ABC9C" stroke-width="1.1" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-teal)"/>
+<path d="M930,268 L520,268 L670,656" stroke="#1ABC9C" stroke-width="1.1" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-teal)"/>
+<text x="580" y="265" font-size="8" fill="#1ABC9C">dispatch</text>
+
+<!-- Events → Kafka -->
+<path d="M325,712 L517,775" stroke="#FF6B35" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-kafka)"/>
+<path d="M497,712 L517,775" stroke="#FF6B35" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-kafka)"/>
+<path d="M670,712 L517,775" stroke="#FF6B35" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-kafka)"/>
+
+<!-- Kafka → Downstream -->
+<path d="M517,825 L522,890" stroke="#FF6B35" stroke-width="1.3" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-kafka)"/>
+<text x="528" y="862" font-size="8" fill="#FF6B35">consume</text>
+
+<!-- Observability lines -->
+<path d="M298,172 L200,303" stroke="#95A5A6" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-gray)"/>
+<path d="M412,172 L200,350" stroke="#95A5A6" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-gray)"/>
+<path d="M676,138 L200,395" stroke="#95A5A6" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-gray)"/>
+<text x="155" y="300" font-size="7.5" fill="#95A5A6">metrics</text>
+<text x="155" y="347" font-size="7.5" fill="#95A5A6">errors</text>
+<text x="155" y="392" font-size="7.5" fill="#95A5A6">spans</text>
+
+<!-- HealthController checks -->
+<path d="M1147,187 L1147,620 L1255,658" stroke="#5BA85B" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.5"/>
+<path d="M1147,187 L1147,620 L1525,658" stroke="#5BA85B" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.5"/>
+<path d="M1147,187 L1147,510 L193,491" stroke="#5BA85B" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.5"/>
+<path d="M1147,187 L1147,820 L685,800" stroke="#5BA85B" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#arr-green)" opacity="0.5"/>
+<text x="1155" y="400" font-size="8" fill="#5BA85B">check</text>
+
+
+<!-- ═══ ANIMATED PACKETS ═══ -->
+
+<!-- Client → AuthTokenListener -->
+<circle r="5" fill="#4A90D9" filter="url(#gb)">
+  <animateMotion dur="2.5s" repeatCount="indefinite" begin="0s"><mpath href="#p-client-authl"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite"/>
+</circle>
+<path id="p-client-authl" d="M810,46 L810,68 L313,68 L313,88" fill="none" stroke="none"/>
+
+<!-- AuthTokenListener → Auth Service -->
+<circle r="4" fill="#E8A838" filter="url(#go)">
+  <animateMotion dur="2s" repeatCount="indefinite" begin="0.5s"><mpath href="#p-authl-authsvc"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+</circle>
+<path id="p-authl-authsvc" d="M248,113 L110,113 L110,148" fill="none" stroke="none"/>
+
+<!-- AuthTokenListener → Controllers -->
+<circle r="4" fill="#E8A838" filter="url(#go)">
+  <animateMotion dur="2s" repeatCount="indefinite" begin="1s"><mpath href="#p-authl-ctrl"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="1s"/>
+</circle>
+<path id="p-authl-ctrl" d="M313,138 L313,200 L1015,200 L1015,146" fill="none" stroke="none"/>
+
+<!-- ProductController → Validator → ProductService -->
+<circle r="4" fill="#5BA85B" filter="url(#gg)">
+  <animateMotion dur="2s" repeatCount="indefinite" begin="1.3s"><mpath href="#p-ctrl-valid"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="1.3s"/>
+</circle>
+<path id="p-ctrl-valid" d="M1015,146 L1015,215 L1150,245" fill="none" stroke="none"/>
+
+<!-- Validator → ProductService -->
+<circle r="4" fill="#9B59B6" filter="url(#gp)">
+  <animateMotion dur="1.5s" repeatCount="indefinite" begin="1.8s"><mpath href="#p-valid-prods"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1.8s"/>
+</circle>
+<path id="p-valid-prods" d="M1150,265 L1007,245" fill="none" stroke="none"/>
+
+<!-- Validator → CategoryService -->
+<circle r="4" fill="#9B59B6" filter="url(#gp)">
+  <animateMotion dur="1.8s" repeatCount="indefinite" begin="2.3s"><mpath href="#p-valid-cats"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="2.3s"/>
+</circle>
+<path id="p-valid-cats" d="M1150,265 L1007,330" fill="none" stroke="none"/>
+
+<!-- SearchController → SearchService -->
+<circle r="4" fill="#5BA85B" filter="url(#gg)">
+  <animateMotion dur="2s" repeatCount="indefinite" begin="0.7s"><mpath href="#p-search-ctrl"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+</circle>
+<path id="p-search-ctrl" d="M1193,146 L1193,215 L1177,330" fill="none" stroke="none"/>
+
+<!-- SearchService → Elasticsearch (query) -->
+<circle r="4" fill="#2196F3" filter="url(#ges)">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="0.4s"><mpath href="#p-search-es"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="0.4s"/>
+</circle>
+<path id="p-search-es" d="M1177,386 L1177,440 L800,440 L800,500 L193,500" fill="none" stroke="none"/>
+
+<!-- ProductIndexListener → Elasticsearch (index) -->
+<circle r="4" fill="#E8A838" filter="url(#go)">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="1.5s"><mpath href="#p-idx-es"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+</circle>
+<path id="p-idx-es" d="M549,196 L549,250 L200,491 L193,491" fill="none" stroke="none"/>
+
+<!-- ProductService → PostgreSQL (persist) -->
+<circle r="4" fill="#9B59B6" filter="url(#gp)">
+  <animateMotion dur="3.5s" repeatCount="indefinite" begin="0.6s"><mpath href="#p-prods-pg"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="3.5s" repeatCount="indefinite" begin="0.6s"/>
+</circle>
+<path id="p-prods-pg" d="M1007,301 L1007,620 L1255,658" fill="none" stroke="none"/>
+
+<!-- CacheManager → Redis (get/set) -->
+<circle r="4" fill="#9B59B6" filter="url(#gp)">
+  <animateMotion dur="2.5s" repeatCount="indefinite" begin="1.2s"><mpath href="#p-cache-redis"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="1.2s"/>
+</circle>
+<path id="p-cache-redis" d="M1177,476 L1177,620 L1525,658" fill="none" stroke="none"/>
+
+<!-- ProductService → ProductCacheManager -->
+<circle r="4" fill="#9B59B6" filter="url(#gp)">
+  <animateMotion dur="1.5s" repeatCount="indefinite" begin="2s"><mpath href="#p-prods-cache"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="2s"/>
+</circle>
+<path id="p-prods-cache" d="M1085,268 L1177,420" fill="none" stroke="none"/>
+
+<!-- StockReservationService → PostgreSQL -->
+<circle r="4" fill="#9B59B6" filter="url(#gp)">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="2.8s"><mpath href="#p-stock-pg"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="2.8s"/>
+</circle>
+<path id="p-stock-pg" d="M1007,476 L1007,620 L1220,658" fill="none" stroke="none"/>
+
+<!-- ProductService → E1 (ProductCreated) -->
+<circle r="5" fill="#1ABC9C" filter="url(#gt)">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="0.3s"><mpath href="#p-prods-e1"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="0.3s"/>
+</circle>
+<path id="p-prods-e1" d="M930,268 L520,268 L325,656" fill="none" stroke="none"/>
+
+<!-- ProductService → E2 (ProductUpdated) -->
+<circle r="5" fill="#1ABC9C" filter="url(#gt)">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="1.2s"><mpath href="#p-prods-e2"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1.2s"/>
+</circle>
+<path id="p-prods-e2" d="M930,268 L520,268 L497,656" fill="none" stroke="none"/>
+
+<!-- ProductService → E3 (ProductDeleted) -->
+<circle r="5" fill="#1ABC9C" filter="url(#gt)">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="2.1s"><mpath href="#p-prods-e3"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="2.1s"/>
+</circle>
+<path id="p-prods-e3" d="M930,268 L520,268 L670,656" fill="none" stroke="none"/>
+
+<!-- E1 → Kafka -->
+<circle r="4.5" fill="#FF6B35" filter="url(#gk)">
+  <animateMotion dur="2s" repeatCount="indefinite" begin="0s"><mpath href="#p-e1-kafka"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite"/>
+</circle>
+<path id="p-e1-kafka" d="M325,712 L517,775" fill="none" stroke="none"/>
+
+<!-- E2 → Kafka -->
+<circle r="4.5" fill="#FF6B35" filter="url(#gk)">
+  <animateMotion dur="2s" repeatCount="indefinite" begin="0.7s"><mpath href="#p-e2-kafka"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+</circle>
+<path id="p-e2-kafka" d="M497,712 L517,775" fill="none" stroke="none"/>
+
+<!-- E3 → Kafka -->
+<circle r="4.5" fill="#FF6B35" filter="url(#gk)">
+  <animateMotion dur="2s" repeatCount="indefinite" begin="1.4s"><mpath href="#p-e3-kafka"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="1.4s"/>
+</circle>
+<path id="p-e3-kafka" d="M670,712 L517,775" fill="none" stroke="none"/>
+
+<!-- Kafka → Order Service (consume) -->
+<circle r="5" fill="#F39C12" filter="url(#go)">
+  <animateMotion dur="1.8s" repeatCount="indefinite" begin="0s"><mpath href="#p-kafka-order"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite"/>
+</circle>
+<path id="p-kafka-order" d="M517,825 L522,890" fill="none" stroke="none"/>
+
+<!-- HttpMetrics → Prometheus -->
+<circle r="3.5" fill="#95A5A6">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="0.3s"><mpath href="#p-http-prom"/></animateMotion>
+  <animate attributeName="opacity" values="0;0.9;0.9;0" dur="3s" repeatCount="indefinite" begin="0.3s"/>
+</circle>
+<path id="p-http-prom" d="M298,172 L200,303" fill="none" stroke="none"/>
+
+<!-- ExceptionListener → Sentry -->
+<circle r="3.5" fill="#95A5A6">
+  <animateMotion dur="3.5s" repeatCount="indefinite" begin="1.5s"><mpath href="#p-exc-sentry"/></animateMotion>
+  <animate attributeName="opacity" values="0;0.9;0.9;0" dur="3.5s" repeatCount="indefinite" begin="1.5s"/>
+</circle>
+<path id="p-exc-sentry" d="M412,172 L200,350" fill="none" stroke="none"/>
+
+<!-- TracingListener → Jaeger -->
+<circle r="3.5" fill="#95A5A6">
+  <animateMotion dur="3s" repeatCount="indefinite" begin="0.9s"><mpath href="#p-trace-jaeger"/></animateMotion>
+  <animate attributeName="opacity" values="0;0.9;0.9;0" dur="3s" repeatCount="indefinite" begin="0.9s"/>
+</circle>
+<path id="p-trace-jaeger" d="M676,138 L200,395" fill="none" stroke="none"/>
+
+</svg>

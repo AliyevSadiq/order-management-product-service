@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[OA\Tag(name: 'Search')]
-#[Route('/api')]
+#[Route('/api/v1')]
 final class SearchController extends AbstractController
 {
     public function __construct(
@@ -23,7 +23,7 @@ final class SearchController extends AbstractController
     }
 
     #[OA\Get(
-        path: '/api/search',
+        path: '/api/v1/search',
         summary: 'Search products using Elasticsearch',
         tags: ['Search'],
         parameters: [

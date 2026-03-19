@@ -1,0 +1,15 @@
+vendor/
+var/
+.git/
+.env.local
+.env.test
+docker-compose.yml
+docker-compose.test.yml
+.idea/
+.vscode/
+node_modules/
+tests/
+docs/
+*.md
+.gitignore
+.dockerignore

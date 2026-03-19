@@ -1,11 +1,14 @@
 graph TB
     CLIENT["Client<br/>(with JWT token)"]
 
-    subgraph PRODUCT["Product Service (Symfony 7 / PHP 8.3+)"]
+    subgraph PRODUCT["Product Service (Symfony 7 / PHP 8.4)"]
         direction TB
 
         subgraph Listeners["Event Listeners"]
             AUTH_L["AuthTokenListener<br/>validates JWT via<br/>auth-service HTTP"]
+            CB["CircuitBreaker<br/>(auth-service)"]
+            RL["RateLimitListener<br/>100 req/60s per user"]
+            TRACE_L["TracingListener<br/>start/finish spans"]
             EXC_L["ExceptionListener"]
             HTTP_M["HttpMetricsListener"]
             PROD_M["ProductMetricsListener"]
@@ -13,15 +16,17 @@ graph TB
         end
 
         subgraph Controllers["Controllers"]
-            PROD_C["ProductController<br/>GET/POST /api/products<br/>GET/PUT/DELETE /api/products/{id}"]
-            CAT_C["CategoryController<br/>GET /api/categories<br/>POST /api/categories<br/>GET /api/categories/{id}"]
-            SEARCH_C["SearchController<br/>GET /api/search"]
+            PROD_C["ProductController<br/>GET/POST /api/v1/products<br/>GET/PUT/DELETE /api/v1/products/{id}"]
+            STOCK_C["StockController<br/>POST /api/v1/products/reserve-stock<br/>POST /api/v1/products/confirm-stock<br/>POST /api/v1/products/release-stock"]
+            CAT_C["CategoryController<br/>GET /api/v1/categories<br/>POST /api/v1/categories<br/>GET /api/v1/categories/{id}"]
+            SEARCH_C["SearchController<br/>GET /api/v1/search"]
             HEALTH_C["HealthController<br/>GET /health/products"]
             METRICS_C["MetricsController<br/>GET /metrics"]
         end
 
         subgraph Services["Service Layer"]
             PROD_S["ProductService<br/>CRUD + SKU validation<br/>+ event dispatch"]
+            STOCK_S["StockReservationService<br/>reserve, confirm,<br/>release stock"]
             CAT_S["CategoryService<br/>CRUD + slug uniqueness<br/>+ parent hierarchy"]
             SEARCH_S["SearchService<br/>Boolean queries<br/>fuzzy matching<br/>price/category filters"]
             CACHE_S["ProductCacheManager<br/>TTL-based invalidation"]
@@ -30,11 +35,11 @@ graph TB
     end
 
     subgraph ExtServices["External Services (HTTP)"]
-        AUTH_SVC["Auth Service<br/>GET /api/auth/profile<br/>(token validation)"]
+        AUTH_SVC["Auth Service<br/>GET /api/v1/auth/profile<br/>(token validation)"]
     end
 
     subgraph Data["Data Stores"]
-        PG[("PostgreSQL 16<br/>products &<br/>categories")]
+        PG[("PostgreSQL 16<br/>products, categories<br/>& stock_reservations")]
         REDIS[("Redis 7<br/>Product cache: 1h TTL<br/>Category cache: 2h TTL")]
     end
 
@@ -46,8 +51,10 @@ graph TB
         KAFKA["topic: product-events"]
     end
 
-    subgraph Events["Published Event"]
+    subgraph Events["Published Events"]
+        E1["ProductCreated<br/>productId, name,<br/>price, sku"]
         E2["ProductUpdated<br/>productId, changedFields,<br/>name, price"]
+        E3["ProductDeleted<br/>productId"]
     end
 
     subgraph Downstream["Downstream Consumer"]
@@ -57,13 +64,17 @@ graph TB
     subgraph Monitoring["Observability"]
         PROM["Prometheus<br/>Metrics"]
         SENTRY["Sentry<br/>Error Tracking"]
+        JAEGER["Jaeger<br/>Distributed Tracing"]
     end
 
     CLIENT -->|"Authorization:<br/>Bearer token"| AUTH_L
-    AUTH_L -->|"GET /api/auth/profile"| AUTH_SVC
+    AUTH_L -->|"GET /api/v1/auth/profile"| AUTH_SVC
+    AUTH_L --> CB
     AUTH_L --> Controllers
 
     PROD_C & CAT_C --> VALID
+    STOCK_C --> STOCK_S
+    STOCK_S -->|"reserve/confirm/release"| PG
     VALID --> PROD_S
     VALID --> CAT_S
     SEARCH_C --> SEARCH_S
@@ -77,13 +88,14 @@ graph TB
     IDX_L -->|"index/update/remove"| ES
     SEARCH_S -->|"query"| ES
 
-    PROD_S -->|"dispatch"| E2
-    E2 --> KAFKA
+    PROD_S -->|"dispatch"| E1 & E2 & E3
+    E1 & E2 & E3 --> KAFKA
 
     KAFKA -->|"consume"| ORDER_SVC
 
     HTTP_M & PROD_M --> PROM
     EXC_L --> SENTRY
+    TRACE_L -->|"spans"| JAEGER
     HEALTH_C -->|"check"| PG
     HEALTH_C -->|"check"| REDIS
     HEALTH_C -->|"check"| ES
@@ -102,14 +114,14 @@ graph TB
     classDef external fill:#4A90D9,stroke:#2C5F8A,color:#fff
 
     class CLIENT client
-    class PROD_C,CAT_C,SEARCH_C,HEALTH_C,METRICS_C controller
-    class AUTH_L,EXC_L,HTTP_M,PROD_M,IDX_L listener
-    class PROD_S,CAT_S,SEARCH_S,CACHE_S,VALID service
+    class PROD_C,STOCK_C,CAT_C,SEARCH_C,HEALTH_C,METRICS_C controller
+    class AUTH_L,CB,RL,TRACE_L,EXC_L,HTTP_M,PROD_M,IDX_L listener
+    class PROD_S,STOCK_S,CAT_S,SEARCH_S,CACHE_S,VALID service
     class PG data
     class REDIS data
     class ES search
-    class E2 event
+    class E1,E2,E3 event
     class KAFKA kafka
-    class PROM,SENTRY monitor
+    class PROM,SENTRY,JAEGER monitor
     class ORDER_SVC downstream
     class AUTH_SVC external

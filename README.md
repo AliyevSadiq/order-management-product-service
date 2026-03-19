@@ -4,23 +4,51 @@ A product catalog microservice built with **Symfony 7.0** and **PHP 8.3+**. Mana
 
 ## Architecture Overview
 
-![Product Service Architecture](docs/product-service-architecture.png)
+![Product Service Architecture](docs/product-service-animated.svg)
 
 ## Table of Contents
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [API Endpoints](#api-endpoints)
-- [Event Publishing](#event-publishing)
-- [Search](#search)
-- [Caching](#caching)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Database Schema](#database-schema)
-- [Microservice Integration](#microservice-integration)
-- [Monitoring & Observability](#monitoring--observability)
-- [Testing](#testing)
+- [Product Service](#product-service)
+  - [Architecture Overview](#architecture-overview)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+  - [API Endpoints](#api-endpoints)
+    - [Product Endpoints](#product-endpoints)
+    - [Category Endpoints](#category-endpoints)
+    - [Search Endpoint](#search-endpoint)
+    - [Stock Endpoints](#stock-endpoints)
+    - [System Endpoints](#system-endpoints)
+    - [Request / Response Examples](#request--response-examples)
+  - [Event Publishing](#event-publishing)
+  - [Search](#search)
+    - [How it works](#how-it-works)
+    - [Index schema](#index-schema)
+  - [Caching](#caching)
+  - [Project Structure](#project-structure)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Run with Docker](#run-with-docker)
+    - [Run Locally](#run-locally)
+  - [Environment Variables](#environment-variables)
+  - [Database Schema](#database-schema)
+    - [products](#products)
+    - [categories](#categories)
+  - [Microservice Integration](#microservice-integration)
+    - [Auth Service (synchronous HTTP)](#auth-service-synchronous-http)
+    - [Order Service (async via Kafka)](#order-service-async-via-kafka)
+  - [Monitoring \& Observability](#monitoring--observability)
+    - [Prometheus Metrics (`GET /metrics`)](#prometheus-metrics-get-metrics)
+    - [Health Check (`GET /health/products`)](#health-check-get-healthproducts)
+    - [Distributed Tracing (Jaeger)](#distributed-tracing-jaeger)
+    - [Circuit Breaker](#circuit-breaker)
+    - [Rate Limiting](#rate-limiting)
+    - [Error Tracking](#error-tracking)
+    - [Logging](#logging)
+  - [Testing](#testing)
+    - [Test Coverage](#test-coverage)
+  - [Docker Services](#docker-services)
+  - [License](#license)
 
 ## Features
 
@@ -32,6 +60,9 @@ A product catalog microservice built with **Symfony 7.0** and **PHP 8.3+**. Mana
 - Publishes ProductUpdated events to Kafka (consumed by order-service to sync product names)
 - JWT token validation via auth-service HTTP call
 - Prometheus metrics for HTTP requests and product operations
+- Distributed tracing via Jaeger (Zipkin format)
+- Circuit breaker for auth-service calls (Redis-backed)
+- Rate limiting per user via token bucket algorithm (Redis + Lua)
 - OpenAPI documentation (NelmioApiDoc)
 
 ## Tech Stack
@@ -77,6 +108,20 @@ Write operations (POST/PUT/DELETE) and product listing require `Authorization: B
 | GET    | `/api/search` | Full-text product search (Elasticsearch)| No            |
 
 **Search query parameters**: `query`, `categoryId`, `minPrice`, `maxPrice`, `page`, `limit`
+
+### Stock Endpoints
+
+| Method | Endpoint                          | Description                 | Auth Required |
+|--------|-----------------------------------|-----------------------------|---------------|
+| POST   | `/api/v1/products/reserve-stock`  | Reserve stock for products  | Yes (Bearer)  |
+| POST   | `/api/v1/products/confirm-stock`  | Confirm a stock reservation | Yes (Bearer)  |
+| POST   | `/api/v1/products/release-stock`  | Release a stock reservation | Yes (Bearer)  |
+
+**Stock reservation flow:**
+
+1. **reserve-stock** — deducts stock, creates reservation (status: reserved, TTL: 15 min)
+2. **confirm-stock** — marks reservation as confirmed (stock stays deducted permanently)
+3. **release-stock** — marks reservation as released (stock returned to product)
 
 ### System Endpoints
 
@@ -368,6 +413,42 @@ Returns connectivity status and response times for:
 - Redis cache
 - Elasticsearch cluster
 - Kafka broker
+
+### Distributed Tracing (Jaeger)
+
+The service integrates with Jaeger for distributed tracing via Zipkin format. Every incoming request is traced end-to-end.
+
+- `TracingListener` — starts a span on each request, extracts `X-Trace-Id` and `X-Span-Id` from headers
+- `TracingFinishListener` — finishes the span after the response is sent (no added latency)
+- `TracingResponseListener` — propagates `X-Trace-Id` and `X-Span-Id` to the response
+- `TraceContextProcessor` — injects `trace_id` and `span_id` into all Monolog log entries
+
+Traces are viewable in the Jaeger UI at `http://localhost:16686` under the `product-service` service name.
+
+### Circuit Breaker
+
+HTTP calls to auth-service are protected by a circuit breaker pattern (stored in Redis for shared state across instances).
+
+| Parameter | Value |
+|-----------|-------|
+| Failure threshold | 5 consecutive failures |
+| Recovery timeout | 30 seconds |
+| Success threshold | 2 successes to close |
+
+States: **Closed** (normal) → **Open** (requests blocked) → **Half-Open** (testing recovery) → **Closed**
+
+### Rate Limiting
+
+Token bucket rate limiting per authenticated user, implemented via a Lua script in Redis for atomic operations.
+
+| Parameter | Value |
+|-----------|-------|
+| Max tokens | 100 per user |
+| Window | 60 seconds |
+
+- `UserRateLimitListener` — checks rate limit on every request
+- `RateLimitHeaderListener` — adds `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers to responses
+- Returns `429 Too Many Requests` with `Retry-After` header when limit is exceeded
 
 ### Error Tracking
 
